@@ -44,7 +44,7 @@ pub struct GeneralConfig {
     /// Default tags for workspaces
     pub tags: Vec<String>,
     /// Default launcher application
-    pub launcher: String,
+    pub launcher: (String, Vec<String>),
     pub mod_mask: KeyModifiers,
     pub pipes: Vec<Rc<RwLock<Child>>>,
     pub layout: Box<Layout>
@@ -117,11 +117,11 @@ impl Config {
                     "2: web".to_owned(),
                     "3: code".to_owned(),
                     "4: media".to_owned()),
-                launcher:            "dmenu_run".to_owned(),
+                launcher:            ("dmenu_run".to_owned(), vec![]),
                 pipes:               Vec::new(),
                 layout:              Box::new(TallLayout { num_master: 1, increment_ratio: 0.3/100.0, ratio: 0.5 }),
             };
-        
+
         let internal_config = InternalConfig::new(
             Box::new(move |a, _, _| a.clone()),
             Box::new(move |a, _, _| a.clone()),

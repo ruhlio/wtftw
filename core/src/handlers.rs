@@ -66,7 +66,8 @@ pub mod default {
         let launcher = config.launcher.clone();
         spawn(move || {
             debug!("spawning launcher");
-            match Command::new(&launcher).spawn() {
+            let (program, args) = launcher;
+            match Command::new(&program).args(&args).spawn() {
                 Ok(_) => (),
                 _     => panic!("unable to start launcher")
             }
